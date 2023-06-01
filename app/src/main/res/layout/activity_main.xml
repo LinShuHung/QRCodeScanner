@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="Send"
                 android:textAllCaps="false"
+                android:onClick="sendFun"
                 />
         </LinearLayout>
         <ListView
