@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.zxing.Result;
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private TextView scanResultText;
     private Button sendBtn, addBtn;
     private ListView scanResultListView;
+    private SimpleAdapter simpleAdapter;
+    private LinkedList<HashMap<String, String>> data = new LinkedList<>();
+    private String[] from = {"itemKey"};
+    private int[] to = {R.id.list_item};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,17 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         addBtn = findViewById(R.id.add);
         addBtn.setEnabled(false);
         scanResultText = findViewById(R.id.scanResult);
+        scanResultListView = findViewById(R.id.scanList);
+        initListviewDataStructure();
+    }
+    private void initListviewDataStructure(){
+        simpleAdapter = new SimpleAdapter(this, data, R.layout.item, from, to);
+        scanResultListView.setAdapter(simpleAdapter);
+        //test list view
+//        HashMap<String, String> testData = new HashMap<>();
+//        testData.put(from[0], "test" );
+//        data.add(testData);
+//        simpleAdapter.notifyDataSetChanged();
     }
 
     public void addFun(View view){
